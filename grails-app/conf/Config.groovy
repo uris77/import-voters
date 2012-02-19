@@ -75,19 +75,38 @@ log4j = {
     // Example of changing the log pattern for the default console
     // appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        //console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
 
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-           'org.codehaus.groovy.grails.web.pages', //  GSP
-           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping', // URL mapping
-           'org.codehaus.groovy.grails.commons', // core / classloading
-           'org.codehaus.groovy.grails.plugins', // plugins
-           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+        environments{
+            production{
+                rollingFile name:'importvoters', maxFileSize:10240, maxBackupIndex: 5, file:'/usr/local/tomcat/logs/importvoters.log',
+                    layout:pattern(conversionPattern:'%d %-5p %c{2} %x - %m%n')
+            }
+            development{
+              console name:'stdout', layout:pattern(conversionPattern: '%d %-5p %c{2} %x - %m%n')
+            }
+        }
+    }
+
+    error  'org.codehaus.groovy.grails.web.servlet'  //  controllers
+           //'org.codehaus.groovy.grails.web.pages', //  GSP
+           //'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+           //'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+           //'org.codehaus.groovy.grails.web.mapping', // URL mapping
+           //'org.codehaus.groovy.grails.commons', // core / classloading
+           //'org.codehaus.groovy.grails.plugins', // plugins
+           //'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+           //'org.springframework',
+           //'org.hibernate',
+           //'net.sf.ehcache.hibernate'
+
+    //info  'org.codehaus.groovy.grails.web.servlet'
+    info 'grails.app.controller'
+
+    root {
+      error 'stdout', 'importvoters'
+      info  'stdout', 'importvoters'
+      additivity = false
+    }
 }
