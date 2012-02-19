@@ -1,0 +1,7 @@
+This is an app that imports the voters in an excel sheet into
+the voter management database. It has no UI, and only offers a restful 
+service that is accessed by voterManagement.
+
+It was taken out of voterManagement app because of dependency conflicts
+between excel-import and export plugins.
+
